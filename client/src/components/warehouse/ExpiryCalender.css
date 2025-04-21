@@ -1,0 +1,8 @@
+/* Highlight days with expiry */
+.expiring-day {
+    background: #ffcccc !important;
+    border-radius: 50%;
+    color: #b30000 !important;
+    font-weight: bold;
+  }
+  

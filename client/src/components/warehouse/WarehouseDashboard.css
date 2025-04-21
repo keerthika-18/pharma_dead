@@ -1,0 +1,43 @@
+/* WarehouseDashboard.css */
+
+.dashboard-container {
+    padding: 24px;
+    background-color: #f9fafb;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+  }
+  
+  .dashboard-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    color: #1e3a8a; /* blue-700 */
+  }
+  
+  .section-card {
+    background-color: #ffffff;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+  }
+  
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  @media (min-width: 1024px) {
+    .dashboard-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  .calendar-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2563eb; /* blue-600 */
+    margin-bottom: 12px;
+  }
+  
