@@ -40,4 +40,27 @@
     color: #2563eb; /* blue-600 */
     margin-bottom: 12px;
   }
-  
+  /* Reset default dim styles */
+.react-calendar__tile {
+  color: black; /* or your preferred normal text color */
+  opacity: 1;
+  font-weight: normal;
+  background: none;
+  box-shadow: none;
+  border: none;
+}
+/* Make the calendar header (e.g., < May 2025 >) bold */
+/* Fix faded calendar navigation */
+.react-calendar__navigation button {
+  opacity: 1 !important;
+  background-color: #f0f0f0 !important;
+  color: black !important;
+  pointer-events: auto !important;
+}
+
+
+/* Expiry date in red */
+/* .react-calendar__tile.expiring-day {
+  color: red !important;
+  font-weight: bold;
+} */

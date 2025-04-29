@@ -28,6 +28,7 @@ const cors = require('cors');
 const warehouseRoutes = require('./routes/warehouseRoutes');
 const reportRoutes = require('./routes/reportRoutes');
 const expiryRoutes = require('./routes/expiryRoutes');
+const orderRoutes = require('./routes/orderRoutes');
 
 const app = express();
 
@@ -46,7 +47,9 @@ mongoose.connect('mongodb://localhost:27017/Deadstock', {
 // Routes
 app.use('/api/warehouse', warehouseRoutes);
 app.use('/api/reports', reportRoutes);      // New: Reports API
-app.use('/api/expiry', expiryRoutes);       // New: Expiry prediction API
+app.use('/api/expiry', expiryRoutes); 
+ app.use('/api/orders', orderRoutes);  
+     // New: Expiry prediction API
 const barcodeRoutes = require('./routes/barcodeRoutes');
 app.use('/api/barcodes', barcodeRoutes);
 

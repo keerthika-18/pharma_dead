@@ -1,50 +1,64 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserMultiFormatReader } from '@zxing/browser';
-import axios from 'axios';
-import './BarcodeScanner.css';
+import React, { useRef, useState } from "react";
+import { BrowserMultiFormatReader } from "@zxing/browser";
+import "./BarcodeScanner.css";
+import axios from 'axios';  // 📌 Make sure you install axios: npm install axios
 
 const BarcodeScanner = () => {
-  const [scanned, setScanned] = useState('');
-  const [hasScanned, setHasScanned] = useState(false);
+  const fileInputRef = useRef(null);
+  const [result, setResult] = useState("");
+  const [preview, setPreview] = useState(null);
+  const [saveMessage, setSaveMessage] = useState("");
 
-  useEffect(() => {
-    const codeReader = new BrowserMultiFormatReader();
+  const handleImageUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
 
-    codeReader.decodeFromVideoDevice(null, 'barcode-video', async (result, err) => {
-      if (result && !hasScanned) {
-        const code = result.getText();
-        setScanned(code);
-        setHasScanned(true);
+    const reader = new FileReader();
+    reader.onload = async () => {
+      const img = new Image();
+      img.src = reader.result;
+      setPreview(reader.result);
 
+      img.onload = async () => {
+        const codeReader = new BrowserMultiFormatReader();
         try {
-          await axios.post('http://localhost:5000/api/barcodes', { code });
-          console.log('Saved to DB:', code);
+          const barcode = await codeReader.decodeFromImageElement(img);
+          setResult(barcode.text);
+
+          // 📤 Send barcode to server
+          await saveBarcode(barcode.text);
+
         } catch (error) {
-          console.error('Save failed:', error);
+          setResult("❌ Barcode not detected.");
         }
-
-        codeReader.reset();
-      }
-    });
-
-    return () => {
-      codeReader.reset();
+      };
     };
-  }, [hasScanned]);
+    reader.readAsDataURL(file);
+  };
+
+  const saveBarcode = async (code) => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/barcodes', { code });
+      setSaveMessage('✅ Barcode saved to database!');
+    } catch (error) {
+      setSaveMessage('❌ Failed to save barcode.');
+      console.error(error);
+    }
+  };
 
   return (
-    <div className="scanner-container">
-      <h2>Scan Barcode</h2>
-      <div className="video-wrapper">
-        <video id="barcode-video" className="barcode-camera" />
-        <div className="barcode-highlight" />
-      </div>
-      {scanned && <p>✅ Scanned: <strong>{scanned}</strong></p>}
+    <div className="barcode-container">
+      <h2>📷 Upload Barcode Image</h2>
+      <input type="file" ref={fileInputRef} accept="image/*" onChange={handleImageUpload} />
+      {preview && <img src={preview} alt="Preview" className="barcode-preview" />}
+      <p className="barcode-result"><strong>Result:</strong> {result}</p>
+      {saveMessage && <p className="barcode-save-message">{saveMessage}</p>}
     </div>
   );
 };
 
 export default BarcodeScanner;
+
 
 // import React, { useEffect, useRef, useState } from 'react';
 // import { BrowserMultiFormatReader } from '@zxing/browser';

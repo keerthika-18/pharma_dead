@@ -1,8 +1,76 @@
 /* Highlight days with expiry */
+/* .react-calendar .expiring-day {
+  background: #ffcccc !important;
+  border-radius: 50%;
+  color: #b30000 !important;
+  font-weight: bold;
+}
+
+/* Disable hover effect from calendar tiles */
+/* .react-calendar__tile:hover {
+  background-color: inherit !important;
+  color: inherit !important;
+} */
+
+/* Disable focus effect from calendar tiles */
+/* .react-calendar__tile:focus {
+  background-color: inherit !important;
+  color: inherit !important;
+} */
+
+/* Prevent active state from changing the background */
+/* .react-calendar__tile:active {
+  background-color: inherit !important;
+} */ 
+/* Stronger and clearer highlight for expiring days */
+/* .react-calendar__tile.expiring-day {
+  background-color: #ffcccc !important;
+  border-radius: 50% !important;
+  color: #b30000 !important;
+  font-weight: bold !important;
+  box-shadow: inset 0 0 0 2px #b30000;
+  opacity: 1 !important;
+  filter: none !important;
+  transition: none !important;
+}
+
+/* Prevent dimming of text inside the tile */
+/* .react-calendar__tile.expiring-day abbr {
+  color: inherit !important;
+  opacity: 1 !important;
+}  */
+/* Reset default dim styles */
+/* .react-calendar__tile {
+  color: black; /* or your preferred normal text color */
+  /* opacity: 1;
+  font-weight: normal;
+  background: none;
+  box-shadow: none;
+  border: none; */
+
+
+/* Expiry date in red */
+.react-calendar__tile.expiring-day {
+  color: red !important;
+  font-weight: bold;
+}
+/* Fix faded calendar navigation */
+.react-calendar__navigation button {
+  opacity: 1 !important;
+  background-color: #f0f0f0 !important;
+  color: black !important;
+  pointer-events: auto !important;
+}
+/* Highlight days with expiry as red circles */
 .expiring-day {
-    background: #ffcccc !important;
-    border-radius: 50%;
-    color: #b30000 !important;
-    font-weight: bold;
-  }
-  
+  background-color: #ff4d4d !important;
+  color: white !important;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  display: inline-block;
+  text-align: center;
+  margin: auto;
+}
